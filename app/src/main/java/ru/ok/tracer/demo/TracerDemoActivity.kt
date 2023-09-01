@@ -29,6 +29,8 @@ class TracerDemoActivity : AppCompatActivity(R.layout.activity_tracer_demo) {
                 val file = File(filesDir, "test_file_$i.tmp")
                 file.writeBytes(Random.nextBytes(1024 * 1024))
             }
+            // Здесь происходит вызов только для демонстрации работы.
+            // Скан диска запускается в фоне и можно регулировать его частоту.
             DiskUsage.runNow(this)
         }
         findViewById<View>(R.id.make_crash).setOnClickListener {

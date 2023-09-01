@@ -41,8 +41,8 @@ android {
 tracer {
     create("defaultConfig") {
         // См. в разделе "Настройки"
-        pluginToken = "ZGUmPPwA1YiLGrAV8YVS6lUxyVEgMm3CK1yOsdjR6kd"
-        appToken = "6sDksybrBjPojOgvkhDccky73Z5X2ujBC1bwVO2mYVT"
+        pluginToken = "YOUR_PLUGIN_TOKEN"
+        appToken = "YOUR_APP_TOKEN"
 
         // Включает загрузку маппингов для билда. По умолчанию включена
         uploadMapping = true
