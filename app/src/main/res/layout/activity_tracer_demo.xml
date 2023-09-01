@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".TracerDemoActivity">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        tools:context="com.example.tracer.MainActivity">
+
+        <Button
+            android:id="@+id/run_oom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Run OOM"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/run_disk_usage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Run disk usage"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/make_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make crash"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/make_native_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make native crash"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/make_anr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make ANR"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/make_non_fatal_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Make NF crash"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/start_systrace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start systrace"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/abort_systrace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abort systrace"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/commit_systrace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Commit systrace"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/start_sampled_trace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start sampled trace"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/abort_sampled_trace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abort sampled trace"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/commit_sampled_trace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Commit sampled trace"
+            android:textSize="11sp" />
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
