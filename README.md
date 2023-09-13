@@ -1,6 +1,8 @@
 tracer-demo
 =======
 
+Tracer - это сервис от OK.Tech для сбора и анализа ошибок в мобильных приложениях под iOS и Android
+
 ## Регистрация и настройка
 
 Для начала нужно:
@@ -27,7 +29,7 @@ dependencyResolutionManagement {
 В вашем `<project>/<app-module>/build.gradle`
 ~~~groovy
 plugins {
-    id 'ru.ok.tracer' version '0.2.6'
+    id 'ru.ok.tracer' version '0.2.7'
 }
 
 tracer {
@@ -55,17 +57,17 @@ dependencies {
     // которые необходимы в данный момент.
 
     // Сбор и анализ крешей и ANR
-    implementation "ru.ok.tracer:tracer-crash-report:0.2.6"
+    implementation "ru.ok.tracer:tracer-crash-report:0.2.7"
     // Сбор и анализ нативных крешей
-    implementation "ru.ok.tracer:tracer-crash-report-native:0.2.6"
+    implementation "ru.ok.tracer:tracer-crash-report-native:0.2.7"
     // Сбор и анализ хипдапмов при OOM
-    implementation "ru.ok.tracer:tracer-heap-dumps:0.2.6"
+    implementation "ru.ok.tracer:tracer-heap-dumps:0.2.7"
     // Анализ потребления дискового места на устройстве
-    implementation "ru.ok.tracer:tracer-disk-usage:0.2.6"
+    implementation "ru.ok.tracer:tracer-disk-usage:0.2.7"
     // Семплирующий профайлер
-    implementation "ru.ok.tracer:tracer-profiler-sampling:0.2.6"
+    implementation "ru.ok.tracer:tracer-profiler-sampling:0.2.7"
      // Систрейс
-    implementation "ru.ok.tracer:tracer-profiler-systrace:0.2.6"
+    implementation "ru.ok.tracer:tracer-profiler-systrace:0.2.7"
 }
 ~~~
 
