@@ -33,7 +33,7 @@ class TracerDemoApp : Application(), HasTracerConfiguration {
                 // опции анализатора дискового пространства
                 setEnabled(true)
                 setInterestingSize(3L * 1024 * 1024 * 1024) // 3GB. Default 10GB
-                setProbability(1 / 100) // 1%
+                setProbability(100) // ( 1 / 100 ) * 100% = 1%
             },
         )
 }
