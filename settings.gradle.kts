@@ -6,6 +6,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        mavenLocal()
     }
 }
 dependencyResolutionManagement {
@@ -14,6 +15,7 @@ dependencyResolutionManagement {
         maven { setUrl("https://artifactory-external.vkpartner.ru/artifactory/maven/") }
         google()
         mavenCentral()
+        mavenLocal()
     }
 }
 
