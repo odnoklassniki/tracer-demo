@@ -1,23 +1,22 @@
 package ru.ok.tracer.demo
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import ru.ok.tracer.Tracer
 import ru.ok.tracer.crash.report.TracerCrashReport
 import ru.ok.tracer.disk.usage.DiskUsage
 import ru.ok.tracer.profiler.sampling.SamplingProfiler
 import ru.ok.tracer.profiler.systrace.SystraceProfiler
 import java.io.File
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 class TracerDemoActivity : AppCompatActivity(R.layout.activity_tracer_demo) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Tracer.setUserId("example123")
         findViewById<View>(R.id.run_oom).setOnClickListener {
             val list = mutableListOf<Any>()
             while (true) {
@@ -59,6 +58,7 @@ class TracerDemoActivity : AppCompatActivity(R.layout.activity_tracer_demo) {
             try {
                 divideByZero()
             } catch (e: Exception) {
+                Tracer.setKey("example", "non fatal example")
                 TracerCrashReport.report(e, "Test issue key")
             }
         }
