@@ -64,7 +64,6 @@ class TracerDemoActivity : AppCompatActivity(R.layout.activity_tracer_demo) {
         }
         findViewById<View>(R.id.start_sampled_trace).setOnClickListener {
             SamplingProfiler.start(
-                context = this,
                 tag = "test_sampled_trace",
                 duration = 5000,
             )
@@ -77,7 +76,6 @@ class TracerDemoActivity : AppCompatActivity(R.layout.activity_tracer_demo) {
         }
         findViewById<View>(R.id.start_systrace).setOnClickListener {
             SystraceProfiler.start(
-                context = this,
                 tag = "test_systrace",
                 duration = 5000,
             )

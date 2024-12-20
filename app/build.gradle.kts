@@ -1,17 +1,17 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("ru.ok.tracer") version("0.3.1")
+    id("ru.ok.tracer") version("1.0.0")
 }
 
 android {
     namespace = "ru.ok.tracer.demo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "ru.ok.tracer.demo"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
 
         versionCode = 1
         versionName = "1.0"
@@ -58,17 +58,17 @@ dependencies {
     // которые необходимы в данный момент.
 
     // Сбор и анализ крешей и ANR
-    implementation("ru.ok.tracer:tracer-crash-report:0.3.1")
+    implementation("ru.ok.tracer:tracer-crash-report:1.0.0")
     // Сбор и анализ нативных крешей
-    implementation("ru.ok.tracer:tracer-crash-report-native:0.3.1")
+    implementation("ru.ok.tracer:tracer-crash-report-native:1.0.0")
     // Сбор и анализ хипдапмов при OOM
-    implementation("ru.ok.tracer:tracer-heap-dumps:0.3.1")
+    implementation("ru.ok.tracer:tracer-heap-dumps:1.0.0")
     // Анализ потребления дискового места на устройстве
-    implementation("ru.ok.tracer:tracer-disk-usage:0.3.1")
+    implementation("ru.ok.tracer:tracer-disk-usage:1.0.0")
     // Семплирующий профайлер
-    implementation("ru.ok.tracer:tracer-profiler-sampling:0.3.1")
+    implementation("ru.ok.tracer:tracer-profiler-sampling:1.0.0")
     // Систрейс
-    implementation("ru.ok.tracer:tracer-profiler-systrace:0.3.1")
+    implementation("ru.ok.tracer:tracer-profiler-systrace:1.0.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
