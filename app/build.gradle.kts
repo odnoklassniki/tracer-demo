@@ -56,19 +56,20 @@ tracer {
 dependencies {
     // Плагины независимы друг от друга. Можно подключать только те,
     // которые необходимы в данный момент.
+    implementation(platform("ru.ok.tracer:tracer-platform:1.0.0"))
 
     // Сбор и анализ крешей и ANR
-    implementation("ru.ok.tracer:tracer-crash-report:1.0.0")
+    implementation("ru.ok.tracer:tracer-crash-report")
     // Сбор и анализ нативных крешей
-    implementation("ru.ok.tracer:tracer-crash-report-native:1.0.0")
+    implementation("ru.ok.tracer:tracer-crash-report-native")
     // Сбор и анализ хипдапмов при OOM
-    implementation("ru.ok.tracer:tracer-heap-dumps:1.0.0")
+    implementation("ru.ok.tracer:tracer-heap-dumps")
     // Анализ потребления дискового места на устройстве
-    implementation("ru.ok.tracer:tracer-disk-usage:1.0.0")
+    implementation("ru.ok.tracer:tracer-disk-usage")
     // Семплирующий профайлер
-    implementation("ru.ok.tracer:tracer-profiler-sampling:1.0.0")
+    implementation("ru.ok.tracer:tracer-profiler-sampling")
     // Систрейс
-    implementation("ru.ok.tracer:tracer-profiler-systrace:1.0.0")
+    implementation("ru.ok.tracer:tracer-profiler-systrace")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

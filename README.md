@@ -12,62 +12,83 @@ Tracer - это сервис от OK.Tech для сбора и анализа о
 
 ## Подключение зависимостей на трейсер к проекту
 
-В вашем `<project>/settings.gradle`
-~~~groovy
+**ВАЖНО!** При каждом обновлении версии SDK настоятельно рекомендуется делать `clean build`.
+
+В вашем `<project>/settings.gradle.kts` добавьте репозитории с плагином трейсера и рантаймом трейсера.
+~~~kotlin
 pluginManagement {
     repositories {
-        maven { url 'https://artifactory-external.vkpartner.ru/artifactory/maven/' }
+        // другие репозитории c вашими зависимостями
+        maven { setUrl("https://artifactory-external.vkpartner.ru/artifactory/maven/") }
     }
 }
 dependencyResolutionManagement {
     repositories {
-        maven { url 'https://artifactory-external.vkpartner.ru/artifactory/maven/' }
+        // другие репозитории c вашими зависимостями
+        maven { setUrl("https://artifactory-external.vkpartner.ru/artifactory/maven/") }
     }
 }
 ~~~
 
-В вашем `<project>/<app-module>/build.gradle`
-~~~groovy
+В вашем `<project>/<app-module>/build.gradle.kts`
+~~~kotlin
 plugins {
-    id 'ru.ok.tracer' version '1.0.0'
+    id("ru.ok.tracer").version("1.0.0")
 }
 
 tracer {
-    defaultConfig {
-         // См. в разделе "Настройки"
+    create("defaultConfig") {
+        // См. в разделе "Настройки"
         pluginToken = "PLUGIN_TOKEN"
         appToken = "APP_TOKEN"
 
         // Включает загрузку маппингов для билда. По умолчанию включена
         uploadMapping = true
+
+        // Включает загрузку отладочной информации из native-библиотек для обработки нативных крешей
+        // Обрабатывает всё, что попадает в build/intermediates/merged_native_libs
+        // т.е. модули с NDK-кодом, библиотеки из зависимостей, библиотеки из jniLibs, ...
+        // Не загружает отладочную информацию для библиотек, у которых нет отладочной информации
+        // 
+        // Без сборщика нативных крешей включать не очень осмысленно
+        // По умолчанию выключено
+        uploadNativeSymbols = true
+
+        // Передаёт дополнительный путь с native-библиотеками в загрузчик
+        // Отладочная информация с библиотек, содержащихся в нем, "перекрывает" ту, что
+        // собирается из build/intermediates/merged_native_libs
+        // По умолчанию null
+        additionalLibrariesPath = projectDir.toString() + "/aVeryNonstandardLibsDirectory"
     }
 
     // Также можно задавать конфигурацию для каждого flavor, buildType, buildVariant.
     // Конфигурации наследуют defaultConfig.
-    debug {
+    create("debug") {
         // Параметры...
     }
-    demoDebug {
+    create("demoDebug") {
         // Параметры...
     }
 }
 
 dependencies {
+    implementation(platform("ru.ok.tracer:tracer-platform:1.0.0"))
+
     // Плагины независимы друг от друга. Можно подключать только те,
     // которые необходимы в данный момент.
 
     // Сбор и анализ крешей и ANR
-    implementation "ru.ok.tracer:tracer-crash-report:1.0.0"
+    implementation("ru.ok.tracer:tracer-crash-report")
     // Сбор и анализ нативных крешей
-    implementation "ru.ok.tracer:tracer-crash-report-native:1.0.0"
+    implementation("ru.ok.tracer:tracer-crash-report-native")
     // Сбор и анализ хипдапмов при OOM
-    implementation "ru.ok.tracer:tracer-heap-dumps:1.0.0"
+    implementation("ru.ok.tracer:tracer-heap-dumps")
     // Анализ потребления дискового места на устройстве
-    implementation "ru.ok.tracer:tracer-disk-usage:1.0.0"
+    implementation("ru.ok.tracer:tracer-disk-usage")
     // Семплирующий профайлер
-    implementation "ru.ok.tracer:tracer-profiler-sampling:1.0.0"
-     // Систрейс
-    implementation "ru.ok.tracer:tracer-profiler-systrace:1.0.0"
+    implementation("ru.ok.tracer:tracer-profiler-sampling")
+    // Систрейс
+    implementation("ru.ok.tracer:tracer-profiler-systrace")
 }
 ~~~
 
@@ -103,7 +124,7 @@ class MyApplication : Application(), HasTracerConfiguration {
 }
 ~~~
 
-Проперти `HasTracerConfiguration.tracerConfiguration` будет запрошена ровно один раз при старте процесса до вызова `Application.onCreate` но после `Application.attachBaseContext`. В геттере уже можно обращаться к контексту приложения, но еще рано обращаться к тому, что проинициализируется в `onCreate`.
+Проперти `HasTracerConfiguration.tracerConfiguration` будет запрошена ровно один раз при старте процесса до вызова `Application.onCreate`, но после `Application.attachBaseContext`. В геттере уже можно обращаться к контексту приложения, но еще рано обращаться к тому, что проинициализируется в `onCreate`.
 
 ## Описание `CoreTracerConfiguration`
 
@@ -121,10 +142,9 @@ class MyApplication : Application(), HasTracerConfiguration {
 ~~~
 
 Опции `CoreTracerConfiguration.Builder`:
-- Таких нет )) Все работает из коробки
 
-Устаревшие или опасные опции `CoreTracerConfiguration.Builder`:
-- `setEnabled` — не используется и будет удалена в версии 0.3.x. Ядро трейсера всегда включено, но не активно пока нет включенных плагинов
-- `setHost`, `provideHost` — изменение адреса трейсера
-- `setStatHost`, `provideStatHost` — изменение адреса трейсера для фичи crash free
-- `setCustomAppKey`, `provideCustomAppKey` — заменяет `sampleUploadToken` из конфигурации gradle-плагина
+| Опция                                               | Описание                                                                                                                   |
+|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `setApiUrl` или `provideApiUrl`                     | Изменяет адреса api Tracer-а. Используйте с умом.                                                                          |
+| `setOverrideAppToken` или `provideOverrideAppToken` | Переопределяет `appToken` из конфигурации gradle-плагина. Используйте с умом.                                              |
+| `setDebugUpload`                                    | Отвечает за включение/выключение загрузки данных в дебажной сборке приложения. По умолчанию загрузка данных **выключена**. |
