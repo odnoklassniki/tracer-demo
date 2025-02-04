@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("ru.ok.tracer") version("1.0.0")
+    id("ru.ok.tracer") version("1.0.2")
 }
 
 android {
@@ -56,7 +56,7 @@ tracer {
 dependencies {
     // Плагины независимы друг от друга. Можно подключать только те,
     // которые необходимы в данный момент.
-    implementation(platform("ru.ok.tracer:tracer-platform:1.0.0"))
+    implementation(platform("ru.ok.tracer:tracer-platform:1.0.2"))
 
     // Сбор и анализ крешей и ANR
     implementation("ru.ok.tracer:tracer-crash-report")

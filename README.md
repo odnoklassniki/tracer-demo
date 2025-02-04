@@ -33,7 +33,7 @@ dependencyResolutionManagement {
 В вашем `<project>/<app-module>/build.gradle.kts`
 ~~~kotlin
 plugins {
-    id("ru.ok.tracer").version("1.0.0")
+    id("ru.ok.tracer").version("1.0.2")
 }
 
 tracer {
@@ -72,7 +72,7 @@ tracer {
 }
 
 dependencies {
-    implementation(platform("ru.ok.tracer:tracer-platform:1.0.0"))
+    implementation(platform("ru.ok.tracer:tracer-platform:1.0.2"))
 
     // Плагины независимы друг от друга. Можно подключать только те,
     // которые необходимы в данный момент.
